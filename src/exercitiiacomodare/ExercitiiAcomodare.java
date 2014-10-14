@@ -19,16 +19,25 @@ public class ExercitiiAcomodare {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        System.out.println("RomanToDecimal:");
-        System.out.println("-Scrie un nr roman valid la tastatura:");
+        /*Problema 1*/
+         System.out.println("RomanToDecimal:");
+         System.out.println("-Scrie un nr roman valid la tastatura:");
 
-        String s;
-        BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
-        s = buff.readLine();
+         String s;
+         BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
+         s = buff.readLine();
 
-        RomanToDecimal ex1 = new RomanToDecimal();
-        System.out.println("-Rezultatul decimal = " + ex1.transform(s));
+         RomanToDecimal ex1 = new RomanToDecimal();
+         System.out.println("-Rezultatul decimal = " + ex1.transform(s));                 
 
+         /*Problema2*/
+        System.out.println("\nBowling:");
+        Bowling ex2 = new Bowling();
+        for (int i = 1; i <= 8; i++) {
+            String filename = "Game" + i + ".in";
+
+            System.out.println("-Scorul final pt fisierul " + i
+                    + " :" + ex2.processGame(filename));
+        }
     }
-
 }
