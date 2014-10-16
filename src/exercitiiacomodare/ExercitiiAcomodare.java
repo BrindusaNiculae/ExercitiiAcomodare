@@ -21,15 +21,16 @@ public class ExercitiiAcomodare {
     public static void main(String[] args) throws IOException {
         String s;
         BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
-        //s = buff.readLine();
 
-        /*Problema 1
-         System.out.println("RomanToDecimal:");
-         System.out.println("-Scrie un nr roman valid la tastatura:");
+        /*Problema 1*/
+        System.out.println("RomanToDecimal:");
+        System.out.println("-Scrie un nr roman valid la tastatura:");
 
-         RomanToDecimal ex1 = new RomanToDecimal();
-         System.out.println("-Rezultatul decimal = " + ex1.transform(s));
+        s = buff.readLine();
 
+        RomanToDecimal ex1 = new RomanToDecimal();
+        System.out.println("-Rezultatul decimal = " + ex1.transform(s));
+        /*
          /*Problema2
          System.out.println("\nBowling:");
          Bowling ex2 = new Bowling();
@@ -39,20 +40,22 @@ public class ExercitiiAcomodare {
          System.out.println("-Scorul final pt fisierul " + i
          + " :" + ex2.processGame(filename));
          }
-         /*
-         /*Problema3*/
-        System.out.println("\nTwitter");
-        Twitter ex3 = new Twitter();
-        while (true) {
-            s = buff.readLine();
+         */
+
+        /*Problema3*/
+        /*
+         System.out.println("\nTwitter");
+         Twitter ex3 = new Twitter();
+         while (true) {
+         s = buff.readLine();
             
-            if (s.contains("EXIT")) {
-                break;
-            } else {
-                ex3.tweet(s);
-            }
+         if (s.contains("EXIT")) {
+         break;
+         } else {
+         ex3.tweet(s);
+         }
 
-        }
-
+         }
+         */
     }
 }

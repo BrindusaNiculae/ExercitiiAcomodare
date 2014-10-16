@@ -18,29 +18,44 @@ public class RomanToDecimal {
     private static final int C = 100;
     private static final int D = 500;
     private static final int M = 1000;
+    private static final int E = 5000;
 
     public int transform(String romanNr) {
         int decimalNr = 0;
-        int i = 0, aux;
+        int i = 0, aux, statusCode = 0;
         char c2 = 'A';
 
-        while (i < romanNr.length()) {
+        while ((i < romanNr.length()) && (statusCode == 0)) {
             aux = 0;
             char c1 = romanNr.charAt(i);
             i++;
             if (i < romanNr.length()) {
                 c2 = romanNr.charAt(i);
             }
-
             switch (c1) {
+                case 'E':
+                    decimalNr += E;
+                    break;
                 case 'M':
-                    decimalNr += M;
+                    switch (c2) {
+                        case 'E':
+                            i++;
+                            decimalNr += (E - M);
+                            break;
+                        default:
+                            decimalNr += M;
+                            break;
+                    }
                     break;
                 case 'D':
                     switch (c2) {
                         case 'M':
                             i++;
                             decimalNr += (M - D);
+                            break;
+                        case 'E':
+                            i++;
+                            decimalNr += (E - D);
                             break;
                         default:
                             decimalNr += D;
@@ -56,6 +71,10 @@ public class RomanToDecimal {
                         case 'M':
                             i++;
                             decimalNr += (M - C);
+                            break;
+                        case 'E':
+                            i++;
+                            decimalNr += (E - C);
                             break;
                         default:
                             decimalNr += C;
@@ -75,6 +94,10 @@ public class RomanToDecimal {
                         case 'M':
                             i++;
                             decimalNr += (M - L);
+                            break;
+                        case 'E':
+                            i++;
+                            decimalNr += (E - L);
                             break;
                         default:
                             decimalNr += L;
@@ -98,6 +121,10 @@ public class RomanToDecimal {
                         case 'M':
                             i++;
                             decimalNr += (M - X);
+                            break;
+                        case 'E':
+                            i++;
+                            decimalNr += (E - X);
                             break;
                         default:
                             decimalNr += X;
@@ -125,6 +152,10 @@ public class RomanToDecimal {
                         case 'M':
                             i++;
                             decimalNr += (M - V);
+                            break;
+                        case 'E':
+                            i++;
+                            decimalNr += (E - V);
                             break;
                         default:
                             decimalNr += V;
@@ -157,16 +188,22 @@ public class RomanToDecimal {
                             i++;
                             decimalNr += (M - I);
                             break;
-
+                        case 'E':
+                            i++;
+                            decimalNr += (E - I);
+                            break;
                         default:
                             decimalNr += I;
                             break;
                     }
                     break;
+                default:
+                    statusCode = 1;
+                    System.err.print("Numarul este invalid\n");
+                    System.exit(statusCode);
+                    break;
             }
         }
-
         return decimalNr;
     }
-
 }
