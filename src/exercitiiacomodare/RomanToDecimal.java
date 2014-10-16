@@ -103,13 +103,33 @@ public class RomanToDecimal {
 
     }
 
+    private void showCannotSubstractMessage(char c1, char c2) {
+        System.err.println("The syntax of the roman number is not valid: cannot substract " + c1 + " from " + c2);
+        System.exit(2);
+    }
+
+    
+    private void checkThreeConsecLetters(String number){
+        
+        int[] consecLetters = new int[8];
+        for(char c:number.toCharArray()){
+            consecLetters[getIndex(c)]++;
+            if(consecLetters[getIndex(c)]>3){
+                System.err.println("The syntax of the roman number is not valid: you can only have 3 maximum consecutive letters of " + c);
+                System.exit(2);
+            }
+        }
+    }
+
     public void transform(String romanNr) {
 
         int decimalNo = 0;
         int j = 0, aux, statusCode = 0;
         char c2 = 'A';
-
+        checkThreeConsecLetters(romanNr);
+        
         while ((j < romanNr.length()) && (statusCode == 0)) {
+            c2 = 'A';
             aux = 0;
             char c1 = romanNr.charAt(j);
             j++;
@@ -140,7 +160,8 @@ public class RomanToDecimal {
                             break;
                         case 'E':
                             j++;
-                            decimalNo += (E - D);
+                            //decimalNo += (E - D);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         default:
                             decimalNo += D;
@@ -159,7 +180,8 @@ public class RomanToDecimal {
                             break;
                         case 'E':
                             j++;
-                            decimalNo += (E - C);
+                            //decimalNo += (E - C);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         default:
                             decimalNo += C;
@@ -174,15 +196,18 @@ public class RomanToDecimal {
                             break;
                         case 'D':
                             j++;
-                            decimalNo += (D - L);
+                            //decimalNo += (D - L);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         case 'M':
                             j++;
-                            decimalNo += (M - L);
+                            //decimalNo += (M - L);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         case 'E':
                             j++;
-                            decimalNo += (E - L);
+                            //decimalNo += (E - L);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         default:
                             decimalNo += L;
@@ -201,15 +226,18 @@ public class RomanToDecimal {
                             break;
                         case 'D':
                             j++;
-                            decimalNo += (D - X);
+                            //decimalNo += (D - X);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         case 'M':
                             j++;
-                            decimalNo += (M - X);
+                            //decimalNo += (M - X);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         case 'E':
                             j++;
-                            decimalNo += (E - X);
+                            //decimalNo += (E - X);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         default:
                             decimalNo += X;
@@ -224,23 +252,28 @@ public class RomanToDecimal {
                             break;
                         case 'L':
                             j++;
-                            decimalNo += (L - V);
+                            //decimalNo += (L - V);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         case 'C':
                             j++;
-                            decimalNo += (C - V);
+                            //decimalNo += (C - V);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         case 'D':
                             j++;
-                            decimalNo += (D - V);
+                            //decimalNo += (D - V);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         case 'M':
                             j++;
-                            decimalNo += (M - V);
+                            //decimalNo += (M - V);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         case 'E':
                             j++;
-                            decimalNo += (E - V);
+                            //decimalNo += (E - V);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         default:
                             decimalNo += V;
@@ -259,23 +292,28 @@ public class RomanToDecimal {
                             break;
                         case 'L':
                             j++;
-                            decimalNo += (L - I);
+                            //decimalNo += (L - I);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         case 'C':
                             j++;
-                            decimalNo += (C - I);
+                            //decimalNo += (C - I);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         case 'D':
                             j++;
-                            decimalNo += (D - I);
+                            //decimalNo += (D - I);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         case 'M':
                             j++;
-                            decimalNo += (M - I);
+                            //decimalNo += (M - I);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         case 'E':
                             j++;
-                            decimalNo += (E - I);
+                            //decimalNo += (E - I);
+                            showCannotSubstractMessage(c1, c2);
                             break;
                         default:
                             decimalNo += I;
