@@ -15,9 +15,9 @@ public class RomanToDecimal {
     static final int V = 5;
     static final int X = 10;
     static final int L = 50;
-    static final int M = 100;
+    static final int C = 100;
     static final int D = 500;
-    static final int C = 1000;
+    static final int M = 1000;
     static final int E = 5000;
 
     private int getValue(char letter) {
@@ -71,7 +71,7 @@ public class RomanToDecimal {
 
         int globalMax;
 
-        if (getValue(currentLetter) <= getValue(nextLeter)) {
+        if (getValue(currentLetter) < getValue(nextLeter)) {
             globalMax = getValue(nextLeter);
             substractOperations[getIndex(nextLeter)] = 1;
         } else {
@@ -81,24 +81,24 @@ public class RomanToDecimal {
         currentLetter = nextLeter;
         for (int j = 2; j < romanNumber.length(); j++) {
             nextLeter = romanNumber.charAt(j);
-            int localMaxx;
+            int localMax;
             if (getValue(currentLetter) < getValue(nextLeter)) {
-                localMaxx = getValue(nextLeter);
+                localMax = getValue(nextLeter);
                 if (substractOperations[getIndex(nextLeter)] == 1) {
                     System.err.println("The syntax of the roman number is not valid.");
                     System.exit(2);
                 }
                 substractOperations[getIndex(nextLeter)] = 1;
             } else {
-                localMaxx = getValue(currentLetter);
+                localMax = getValue(currentLetter);
             }
 
-            if (localMaxx > globalMax) {
+            if (localMax > globalMax) {
                 System.err.println("The syntax of the roman number is not valid.");
                 System.exit(2);
             }
             currentLetter = nextLeter;
-            globalMax = localMaxx;
+            globalMax = localMax;
         }
 
     }
@@ -115,7 +115,7 @@ public class RomanToDecimal {
             j++;
             if (j < romanNr.length()) {
                 c2 = romanNr.charAt(j);
-                j++;
+                //j++;
             }
             switch (c1) {
                 case 'E':
