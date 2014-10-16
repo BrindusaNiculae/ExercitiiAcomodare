@@ -11,14 +11,14 @@ package exercitiiacomodare;
  */
 public class RomanToDecimal {
 
-    private static final int I = 1;
-    private static final int V = 5;
-    private static final int X = 10;
-    private static final int L = 50;
-    private static final int C = 100;
-    private static final int D = 500;
-    private static final int M = 1000;
-    private static final int E = 5000;
+    static final int I = 1;
+    static final int V = 5;
+    static final int X = 10;
+    static final int L = 50;
+    static final int M = 100;
+    static final int D = 500;
+    static final int C = 1000;
+    static final int E = 5000;
 
     private int getValue(char letter) {
         switch (letter) {
@@ -42,8 +42,7 @@ public class RomanToDecimal {
         return -1;
     }
 
-    
-    private int getIndex(char letter){
+    private int getIndex(char letter) {
         switch (letter) {
             case 'I':
                 return 0;
@@ -64,224 +63,222 @@ public class RomanToDecimal {
         }
         return -1;
     }
-    
-    
-    public void checkRomanNumber(String romanNumber){
-        int[] substractOperations=new int[8];
-        char currentLetter=romanNumber.charAt(0);
-        char nextLetter=romanNumber.charAt(1);
-        
+
+    public void checkRomanNr(String romanNumber) {
+        int[] substractOperations = new int[8];
+        char currentLetter = romanNumber.charAt(0);
+        char nextLeter = romanNumber.charAt(1);
+
         int globalMax;
-        
-        if(getValue(currentLetter)<getValue(nextLetter)){
-            globalMax=getValue(nextLetter);
-            substractOperations[getIndex(nextLetter)]=1;
-        }else{
-            globalMax=getValue(currentLetter);
+
+        if (getValue(currentLetter) <= getValue(nextLeter)) {
+            globalMax = getValue(nextLeter);
+            substractOperations[getIndex(nextLeter)] = 1;
+        } else {
+            globalMax = getValue(currentLetter);
         }
-        
-        currentLetter=nextLetter;
-        for(int i=2;i<romanNumber.length();i++){
-            nextLetter=romanNumber.charAt(i);
-            int localMax;
-            if(getValue(currentLetter)<getValue(nextLetter)){
-                localMax=getValue(nextLetter);
-                if(substractOperations[getIndex(nextLetter)]==1){
+
+        currentLetter = nextLeter;
+        for (int j = 2; j < romanNumber.length(); j++) {
+            nextLeter = romanNumber.charAt(j);
+            int localMaxx;
+            if (getValue(currentLetter) < getValue(nextLeter)) {
+                localMaxx = getValue(nextLeter);
+                if (substractOperations[getIndex(nextLeter)] == 1) {
                     System.err.println("The syntax of the roman number is not valid.");
                     System.exit(2);
                 }
-                substractOperations[getIndex(nextLetter)]=1;
-            }else{
-                localMax=getValue(currentLetter);
+                substractOperations[getIndex(nextLeter)] = 1;
+            } else {
+                localMaxx = getValue(currentLetter);
             }
-            
-            if(localMax>globalMax){
+
+            if (localMaxx > globalMax) {
                 System.err.println("The syntax of the roman number is not valid.");
                 System.exit(2);
             }
-            currentLetter=nextLetter;
-            globalMax=localMax;
+            currentLetter = nextLeter;
+            globalMax = localMaxx;
         }
-        
-    
+
     }
-    
-    
+
     public void transform(String romanNr) {
-        
-        int decimalNr = 0;
-        int i = 0, aux, statusCode = 0;
+
+        int decimalNo = 0;
+        int j = 0, aux, statusCode = 0;
         char c2 = 'A';
 
-        while ((i < romanNr.length()) && (statusCode == 0)) {
+        while ((j < romanNr.length()) && (statusCode == 0)) {
             aux = 0;
-            char c1 = romanNr.charAt(i);
-            i++;
-            if (i < romanNr.length()) {
-                c2 = romanNr.charAt(i);
+            char c1 = romanNr.charAt(j);
+            j++;
+            if (j < romanNr.length()) {
+                c2 = romanNr.charAt(j);
+                j++;
             }
             switch (c1) {
                 case 'E':
-                    decimalNr += E;
+                    decimalNo += E;
                     break;
                 case 'M':
                     switch (c2) {
                         case 'E':
-                            i++;
-                            decimalNr += (E - M);
+                            j++;
+                            decimalNo += (E - M);
                             break;
                         default:
-                            decimalNr += M;
+                            decimalNo += M;
                             break;
                     }
                     break;
                 case 'D':
                     switch (c2) {
                         case 'M':
-                            i++;
-                            decimalNr += (M - D);
+                            j++;
+                            decimalNo += (M - D);
                             break;
                         case 'E':
-                            i++;
-                            decimalNr += (E - D);
+                            j++;
+                            decimalNo += (E - D);
                             break;
                         default:
-                            decimalNr += D;
+                            decimalNo += D;
                             break;
                     }
                     break;
                 case 'C':
                     switch (c2) {
                         case 'D':
-                            i++;
-                            decimalNr += (D - C);
+                            j++;
+                            decimalNo += (D - C);
                             break;
                         case 'M':
-                            i++;
-                            decimalNr += (M - C);
+                            j++;
+                            decimalNo += (M - C);
                             break;
                         case 'E':
-                            i++;
-                            decimalNr += (E - C);
+                            j++;
+                            decimalNo += (E - C);
                             break;
                         default:
-                            decimalNr += C;
+                            decimalNo += C;
                             break;
                     }
                     break;
                 case 'L':
                     switch (c2) {
                         case 'C':
-                            i++;
-                            decimalNr += (C - L);
+                            j++;
+                            decimalNo += (C - L);
                             break;
                         case 'D':
-                            i++;
-                            decimalNr += (D - L);
+                            j++;
+                            decimalNo += (D - L);
                             break;
                         case 'M':
-                            i++;
-                            decimalNr += (M - L);
+                            j++;
+                            decimalNo += (M - L);
                             break;
                         case 'E':
-                            i++;
-                            decimalNr += (E - L);
+                            j++;
+                            decimalNo += (E - L);
                             break;
                         default:
-                            decimalNr += L;
+                            decimalNo += L;
                             break;
                     }
                     break;
                 case 'X':
                     switch (c2) {
                         case 'L':
-                            i++;
-                            decimalNr += (L - X);
+                            j++;
+                            decimalNo += (L - X);
                             break;
                         case 'C':
-                            i++;
-                            decimalNr += (C - X);
+                            j++;
+                            decimalNo += (C - X);
                             break;
                         case 'D':
-                            i++;
-                            decimalNr += (D - X);
+                            j++;
+                            decimalNo += (D - X);
                             break;
                         case 'M':
-                            i++;
-                            decimalNr += (M - X);
+                            j++;
+                            decimalNo += (M - X);
                             break;
                         case 'E':
-                            i++;
-                            decimalNr += (E - X);
+                            j++;
+                            decimalNo += (E - X);
                             break;
                         default:
-                            decimalNr += X;
+                            decimalNo += X;
                             break;
                     }
                     break;
                 case 'V':
                     switch (c2) {
                         case 'X':
-                            i++;
-                            decimalNr += (X - V);
+                            j++;
+                            decimalNo += (X - V);
                             break;
                         case 'L':
-                            i++;
-                            decimalNr += (L - V);
+                            j++;
+                            decimalNo += (L - V);
                             break;
                         case 'C':
-                            i++;
-                            decimalNr += (C - V);
+                            j++;
+                            decimalNo += (C - V);
                             break;
                         case 'D':
-                            i++;
-                            decimalNr += (D - V);
+                            j++;
+                            decimalNo += (D - V);
                             break;
                         case 'M':
-                            i++;
-                            decimalNr += (M - V);
+                            j++;
+                            decimalNo += (M - V);
                             break;
                         case 'E':
-                            i++;
-                            decimalNr += (E - V);
+                            j++;
+                            decimalNo += (E - V);
                             break;
                         default:
-                            decimalNr += V;
+                            decimalNo += V;
                             break;
                     }
                     break;
                 case 'I':
                     switch (c2) {
                         case 'V':
-                            i++;
-                            decimalNr += (V - I);
+                            j++;
+                            decimalNo += (V - I);
                             break;
                         case 'X':
-                            i++;
-                            decimalNr += (X - I);
+                            j++;
+                            decimalNo += (X - I);
                             break;
                         case 'L':
-                            i++;
-                            decimalNr += (L - I);
+                            j++;
+                            decimalNo += (L - I);
                             break;
                         case 'C':
-                            i++;
-                            decimalNr += (C - I);
+                            j++;
+                            decimalNo += (C - I);
                             break;
                         case 'D':
-                            i++;
-                            decimalNr += (D - I);
+                            j++;
+                            decimalNo += (D - I);
                             break;
                         case 'M':
-                            i++;
-                            decimalNr += (M - I);
+                            j++;
+                            decimalNo += (M - I);
                             break;
                         case 'E':
-                            i++;
-                            decimalNr += (E - I);
+                            j++;
+                            decimalNo += (E - I);
                             break;
                         default:
-                            decimalNr += I;
+                            decimalNo += I;
                             break;
                     }
                     break;
@@ -293,9 +290,8 @@ public class RomanToDecimal {
             }
         }
 
-        
-        checkRomanNumber(romanNr);
-        System.out.println("Your decimal number is: " + decimalNr);
+        checkRomanNr(romanNr);
+        System.out.println("Your decimal number is: " + decimalNo);
         System.exit(statusCode);
         //return decimalNr;
     }
