@@ -20,7 +20,95 @@ public class RomanToDecimal {
     private static final int M = 1000;
     private static final int E = 5000;
 
-    public int transform(String romanNr) {
+    private int getValue(char letter) {
+        switch (letter) {
+            case 'I':
+                return I;
+            case 'V':
+                return V;
+            case 'X':
+                return X;
+            case 'L':
+                return L;
+            case 'C':
+                return C;
+            case 'D':
+                return D;
+            case 'M':
+                return M;
+            case 'E':
+                return E;
+        }
+        return -1;
+    }
+
+    
+    private int getIndex(char letter){
+        switch (letter) {
+            case 'I':
+                return 0;
+            case 'V':
+                return 1;
+            case 'X':
+                return 2;
+            case 'L':
+                return 3;
+            case 'C':
+                return 4;
+            case 'D':
+                return 5;
+            case 'M':
+                return 6;
+            case 'E':
+                return 7;
+        }
+        return -1;
+    }
+    
+    
+    public void checkRomanNumber(String romanNumber){
+        int[] substractOperations=new int[8];
+        char currentLetter=romanNumber.charAt(0);
+        char nextLetter=romanNumber.charAt(1);
+        
+        int globalMax;
+        
+        if(getValue(currentLetter)<getValue(nextLetter)){
+            globalMax=getValue(nextLetter);
+            substractOperations[getIndex(nextLetter)]=1;
+        }else{
+            globalMax=getValue(currentLetter);
+        }
+        
+        currentLetter=nextLetter;
+        for(int i=2;i<romanNumber.length();i++){
+            nextLetter=romanNumber.charAt(i);
+            int localMax;
+            if(getValue(currentLetter)<getValue(nextLetter)){
+                localMax=getValue(nextLetter);
+                if(substractOperations[getIndex(nextLetter)]==1){
+                    System.err.println("The syntax of the roman number is not valid.");
+                    System.exit(2);
+                }
+                substractOperations[getIndex(nextLetter)]=1;
+            }else{
+                localMax=getValue(currentLetter);
+            }
+            
+            if(localMax>globalMax){
+                System.err.println("The syntax of the roman number is not valid.");
+                System.exit(2);
+            }
+            currentLetter=nextLetter;
+            globalMax=localMax;
+        }
+        
+    
+    }
+    
+    
+    public void transform(String romanNr) {
+        
         int decimalNr = 0;
         int i = 0, aux, statusCode = 0;
         char c2 = 'A';
@@ -201,9 +289,14 @@ public class RomanToDecimal {
                     statusCode = 1;
                     System.err.print("Numarul este invalid\n");
                     System.exit(statusCode);
-                    break;
+                //break;
             }
         }
-        return decimalNr;
+
+        
+        checkRomanNumber(romanNr);
+        System.out.println("Your decimal number is: " + decimalNr);
+        System.exit(statusCode);
+        //return decimalNr;
     }
 }

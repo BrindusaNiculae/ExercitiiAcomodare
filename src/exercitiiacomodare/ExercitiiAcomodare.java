@@ -29,7 +29,8 @@ public class ExercitiiAcomodare {
         s = buff.readLine();
 
         RomanToDecimal ex1 = new RomanToDecimal();
-        System.out.println("-Rezultatul decimal = " + ex1.transform(s));
+        ex1.transform(s);
+        //System.out.println("-Rezultatul decimal = " + ex1.transform(s));
         /*
          /*Problema2
          System.out.println("\nBowling:");
