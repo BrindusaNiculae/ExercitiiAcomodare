@@ -96,6 +96,9 @@ public class RomanNumber {
             if (getValue(currentLetter) < getValue(nextLeter)) {
                 globalMax = getValue(nextLeter);
                 substractOperations[getIndex(nextLeter)] = 1;
+                if (!checkValidSubstraction(currentLetter, nextLeter)) {
+                    return false;
+                }
             } else {
                 globalMax = getValue(currentLetter);
             }
@@ -107,19 +110,18 @@ public class RomanNumber {
                 if (getValue(currentLetter) < getValue(nextLeter)) {
                     localMax = getValue(nextLeter);
                     if (substractOperations[getIndex(nextLeter)] == 1) {
-//                        System.err.println("The syntax of the roman number is not valid.");
-//                        System.exit(2);
                         statusCode = 2;
                         return false;
                     }
                     substractOperations[getIndex(nextLeter)] = 1;
+                    if (!checkValidSubstraction(currentLetter, nextLeter)) {
+                        return false;
+                    }
                 } else {
                     localMax = getValue(currentLetter);
                 }
 
                 if (localMax > globalMax) {
-//                    System.err.println("The syntax of the roman number is not valid.");
-//                    System.exit(2);
                     statusCode = 2;
                     return false;
                 }
@@ -130,19 +132,18 @@ public class RomanNumber {
         return true;
     }
 
-    private void checkValidSubstraction(char c1, char c2) {
-        int index1 = getIndex(c1);
-        int index2 = getIndex(c2);
-
-        if ((index2 % 2) == 0) {
-            if ((index2 - index1) > 2) {
-                showCannotSubstractMessage(c1, c2);
-            }
-        } else {
-            if ((index2 - index1) > 1) {
-                showCannotSubstractMessage(c1, c2);
-            }
+    private boolean checkValidSubstraction(char c1, char c2) {
+        if ((c1 != 'I') && (c1 != 'X') && (c1 != 'C') && (c1 != 'M')) {
+            showCannotSubstractMessage(c1, c2);
         }
+        float value1 = getValue(c1);
+        float value2 = getValue(c2);
+
+        if ((value2 / value1) > 10) {
+            statusCode = 2;
+            return false;
+        }
+        return true;
     }
 
     private boolean checkThreeConsecLetters(String number) {
@@ -151,8 +152,6 @@ public class RomanNumber {
         for (char c : number.toCharArray()) {
             consecLetters[getIndex(c)]++;
             if (consecLetters[getIndex(c)] > 3) {
-//                System.err.println("The syntax of the roman number is not valid: you can only have 3 maximum consecutive letters of " + c);
-//                System.exit(2);
                 statusCode = 2;
                 return false;
             }
@@ -164,8 +163,6 @@ public class RomanNumber {
         for (char c : number.toCharArray()) {
             float value = getValue(c);
             if (value < 0) {
-//                System.err.println("Invalid letter");
-//                System.exit(1);
                 statusCode = 1;
                 return false;
             }
@@ -217,9 +214,6 @@ public class RomanNumber {
                 if (value1 >= value2) {
                     decimalNr += value1;
                 } else {
-                    if (syntaxCheckToggle) {
-                        checkValidSubstraction(c1, c2);
-                    }
                     decimalNr += (value2 - value1);
                     j++;
                 }
