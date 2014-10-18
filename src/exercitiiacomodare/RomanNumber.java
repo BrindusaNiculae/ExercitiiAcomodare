@@ -11,13 +11,15 @@ package exercitiiacomodare;
  */
 public class RomanNumber {
 
-    static final int I = 1;
-    static final int V = 5;
-    static final int X = 10;
-    static final int L = 50;
-    static final int C = 100;
-    static final int D = 500;
-    static final int M = 1000;
+    static final float I = 1f;
+    static final float V = 5f;
+    static final float X = 10f;
+    static final float L = 50f;
+    static final float C = 100f;
+    static final float D = 500f;
+    static final float M = 1000f;
+    static final float S = 1/2f;
+    static final float star = 1/12f;
     private boolean syntaxCheckToggle = true;
     
     public void setSyntaxCheckToggle(boolean b){
@@ -28,7 +30,7 @@ public class RomanNumber {
         return syntaxCheckToggle;
     }
 
-    private int getValue(char letter) {
+    private float getValue(char letter) {
         switch (letter) {
             case 'I':
                 return I;
@@ -44,7 +46,10 @@ public class RomanNumber {
                 return D;
             case 'M':
                 return M;
-            
+            case 'S':
+                return S;
+            case '*':
+                return star;            
         }
         return -1;
     }
@@ -65,6 +70,10 @@ public class RomanNumber {
                 return 5;
             case 'M':
                 return 6;
+            case 'S':
+                return 7;
+            case '*':
+                return 8;
            
         }
         return -1;
@@ -76,12 +85,12 @@ public class RomanNumber {
     }
 
     public void checkRomanNr(String romanNumber) {
-        int[] substractOperations = new int[7];
+        float[] substractOperations = new float[9];
         char currentLetter = romanNumber.charAt(0);
         if(romanNumber.length() > 1){
         char nextLeter = romanNumber.charAt(1);
 
-        int globalMax;
+        float globalMax;
 
         if (getValue(currentLetter) < getValue(nextLeter)) {
             globalMax = getValue(nextLeter);
@@ -93,7 +102,7 @@ public class RomanNumber {
         currentLetter = nextLeter;
         for (int j = 2; j < romanNumber.length(); j++) {
             nextLeter = romanNumber.charAt(j);
-            int localMax;
+            float localMax;
             if (getValue(currentLetter) < getValue(nextLeter)) {
                 localMax = getValue(nextLeter);
                 if (substractOperations[getIndex(nextLeter)] == 1) {
@@ -132,7 +141,7 @@ public class RomanNumber {
 
     private void checkThreeConsecLetters(String number) {
 
-        int[] consecLetters = new int[8];
+        int[] consecLetters = new int[9];
         for (char c : number.toCharArray()) {
             consecLetters[getIndex(c)]++;
             if (consecLetters[getIndex(c)] > 3) {
@@ -144,7 +153,7 @@ public class RomanNumber {
 
     private void checkValidLetters(String number) {
         for (char c : number.toCharArray()) {
-            int value = getValue(c);
+            float value = getValue(c);
             if (value < 0) {
                 System.err.println("Invalid letter");
                 System.exit(1);
@@ -159,14 +168,16 @@ public class RomanNumber {
             checkRomanNr(romanNr);
             checkThreeConsecLetters(romanNr);
         }
-        int decimalNr = 0;
+        float decimalNr;
+        decimalNr = 0f;
         int j = 0;
         char c2;
 
         while (j < romanNr.length()) {
             c2 = '0';
-            int value2 = -1;
-            int value1;
+            float value1;
+            float value2 = -1;
+            
             char c1 = romanNr.charAt(j);
             value1 = getValue(c1);
 
