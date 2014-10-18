@@ -25,15 +25,18 @@ public class ExercitiiAcomodare {
         /*Problema 1*/
         System.out.println("RomanToDecimal:");
         RomanNumber ex1 = new RomanNumber();
-
+        System.out.println("Citeste nr roman: ");
+        String nr = buff.readLine();
+        System.out.println("Citeste o comanda: ");
         while (true) {
             s = buff.readLine();
-            
-            if (s.contains("t")) {
+            if (s.contains("c")) {
+                ex1.doGeneralCheck(nr);
+            } else if (s.contains("t")) {
                 boolean b = ex1.getSyntaxCheckToggle();
                 ex1.setSyntaxCheckToggle(!b);
             } else {
-                ex1.transform(s);
+                ex1.transform(nr);
             }
         }
 
