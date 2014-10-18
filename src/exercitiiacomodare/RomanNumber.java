@@ -18,7 +18,6 @@ public class RomanNumber {
     static final int C = 100;
     static final int D = 500;
     static final int M = 1000;
-    static final int E = 5000;
     private boolean syntaxCheckToggle = true;
     
     public void setSyntaxCheckToggle(boolean b){
@@ -45,8 +44,7 @@ public class RomanNumber {
                 return D;
             case 'M':
                 return M;
-            case 'E':
-                return E;
+            
         }
         return -1;
     }
@@ -67,8 +65,7 @@ public class RomanNumber {
                 return 5;
             case 'M':
                 return 6;
-            case 'E':
-                return 7;
+           
         }
         return -1;
     }
@@ -79,7 +76,7 @@ public class RomanNumber {
     }
 
     public void checkRomanNr(String romanNumber) {
-        int[] substractOperations = new int[8];
+        int[] substractOperations = new int[7];
         char currentLetter = romanNumber.charAt(0);
         if(romanNumber.length() > 1){
         char nextLeter = romanNumber.charAt(1);
