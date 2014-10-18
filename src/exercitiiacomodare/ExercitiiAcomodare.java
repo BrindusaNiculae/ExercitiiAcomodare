@@ -24,12 +24,19 @@ public class ExercitiiAcomodare {
 
         /*Problema 1*/
         System.out.println("RomanToDecimal:");
-        System.out.println("-Scrie un nr roman valid la tastatura:");
+        RomanNumber ex1 = new RomanNumber();
 
-        s = buff.readLine();
+        while (true) {
+            s = buff.readLine();
+            
+            if (s.contains("t")) {
+                boolean b = ex1.getSyntaxCheckToggle();
+                ex1.setSyntaxCheckToggle(!b);
+            } else {
+                ex1.transform(s);
+            }
+        }
 
-        RomanToDecimal ex1 = new RomanToDecimal();
-        ex1.transform(s);
         //System.out.println("-Rezultatul decimal = " + ex1.transform(s));
         /*
          /*Problema2

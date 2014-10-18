@@ -124,18 +124,18 @@ public class RomanToDecimal {
     public void transform(String romanNr) {
 
         int decimalNo = 0;
-        int j = 0, aux, statusCode = 0;
+        int j = 0, statusCode = 0;
         char c2 = 'A';
         checkThreeConsecLetters(romanNr);
         
         while ((j < romanNr.length()) && (statusCode == 0)) {
             c2 = 'A';
-            aux = 0;
+            
             char c1 = romanNr.charAt(j);
             j++;
             if (j < romanNr.length()) {
                 c2 = romanNr.charAt(j);
-                //j++;
+                
             }
             switch (c1) {
                 case 'E':
