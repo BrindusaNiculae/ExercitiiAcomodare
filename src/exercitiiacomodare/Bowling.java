@@ -8,27 +8,45 @@ package exercitiiacomodare;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Brindu
  */
-public class Bowling {
+public class Bowling implements BowlingScoreCalculator {
 
     private int roll1, roll2 = -1, nextRoll1 = -1, nextRoll2 = -1;
     private int score;
-    private int nrOfPerfectRolls = 0;
+    private int nrOfPerfectRolls;
+    private int[] rolls;
+    private final static int N = 24;
 
-    public int processGame(String filename) throws FileNotFoundException {
+    Bowling() {
         score = 0;
-        roll2 = -1;
-        nextRoll1 = -1;
-        nextRoll2 = -1;
+        nrOfPerfectRolls = 0;
+        rolls = new int[N];
+    }
 
+    public int[] readFile(String filename) throws FileNotFoundException {
+        int[] vector = new int[N];
         Scanner scanner = new Scanner(new File(filename));
-        roll1 = scanner.nextInt();
+        int i = 0;
+        while (scanner.hasNextInt()) {
+            vector[i] = scanner.nextInt();
+            i++;
+        }
+        return vector;
+    }
 
-        while (true) {
+    @Override
+    public int computeScoreFor(int[] rolls) {
+
+        int i = 1;
+        roll1 = rolls[0];
+        while (i < N) {
+
             /*STRIKE*/
             if (roll1 == 10) {
                 nrOfPerfectRolls++;
@@ -38,11 +56,11 @@ public class Bowling {
                 }
                 if ((roll2 != -1) && (roll2 != 10)) {
                     nextRoll1 = roll2;
-                } else if ((scanner.hasNextInt()) && (nextRoll1 == -1)) {
-                    nextRoll1 = scanner.nextInt();
+                } else if ((i < N) && (nextRoll1 == -1)) {
+                    nextRoll1 = rolls[i++];
                 }
-                if (scanner.hasNextInt()) {
-                    nextRoll2 = scanner.nextInt();
+                if (i < N) {
+                    nextRoll2 = rolls[i++];
                     score += roll1 + nextRoll1 + nextRoll2;
                     roll1 = nextRoll1;
                     roll2 = nextRoll2;
@@ -63,13 +81,13 @@ public class Bowling {
                 nextRoll1 = 10;
             }/*Daca este SPARE sau OPEN*/ else {
                 if (roll2 == -1) {
-                    roll2 = scanner.nextInt();
+                    roll2 = rolls[i++];
                 }
-                if (scanner.hasNextInt()) {
-                    nextRoll1 = scanner.nextInt();
+                if (i < N) {
+                    nextRoll1 = rolls[i++];
 
-                    if (scanner.hasNextInt()) {
-                        nextRoll2 = scanner.nextInt();
+                    if (i < N) {
+                        nextRoll2 = rolls[i++];
 
                         /*SPARE*/
                         if ((roll1 + roll2) == 10) {
@@ -95,5 +113,6 @@ public class Bowling {
                 }
             }
         }
+        return score;
     }
 }

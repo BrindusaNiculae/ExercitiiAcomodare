@@ -23,6 +23,7 @@ public class ExercitiiAcomodare {
         BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
 
         /*Problema 1*/
+        /*
         System.out.println("RomanToDecimal:");
         RomanNumber ex1 = new RomanNumber();
         System.out.println("Citeste nr roman: ");
@@ -41,17 +42,20 @@ public class ExercitiiAcomodare {
         }
 
         //System.out.println("-Rezultatul decimal = " + ex1.transform(s));
-        /*
-         /*Problema2
+        */
+        
+         /*Problema2*/
          System.out.println("\nBowling:");
-         Bowling ex2 = new Bowling();
+         int [] rolls;
          for (int i = 1; i <= 8; i++) {
          String filename = "Game" + i + ".in";
-
+         Bowling ex2 = new Bowling();
+         rolls = ex2.readFile(filename);
+         
          System.out.println("-Scorul final pt fisierul " + i
-         + " :" + ex2.processGame(filename));
+         + " :" + ex2.computeScoreFor(rolls));
          }
-         */
+         
 
         /*Problema3*/
         /*
