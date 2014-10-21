@@ -57,7 +57,6 @@ public class Bowling implements BowlingScoreCalculator {
                 nrOfPerfectRolls++;
                 // System.out.println("If1, jocul " + gameNr);
 
-                /*if inutil*/
                 if ((roll2 != -1) && (roll2 != 10)) {
                        //System.out.println("If3, jocul " + gameNr);
                     nextRoll1 = roll2;
