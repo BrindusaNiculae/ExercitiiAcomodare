@@ -42,43 +42,42 @@ public class ExercitiiAcomodare {
          }
 
          //System.out.println("-Rezultatul decimal = " + ex1.transform(s));
-         */
-        /*Problema2*/
+         
+         /*Problema2*/
         //System.out.println("\nBowling:");
-        int[] rolls;
-        int[] correctResult = new int[]{0, 20, 16, 24, 300, 78, 30, 75, 0, 120, 32};
-
-        for (int i = 1; i <= 11; i++) {
-            String filename = "Game" + (i) + ".in";
-            Bowling ex2 = new Bowling();
-            rolls = ex2.readFile(filename);
-            ex2.setGameNr(i);
-            int rezult = ex2.computeScoreFor(rolls);
-//            if( rezult == correctResult[i-1] ){
-//                System.out.println("CORECT");
-//            } else{
-//                System.out.println("INCORECT");
-//            }
-//            System.out.println("-Scorul final pt fisierul " + i
-//                    + " :" + rezult);
-//        }
-            System.out.println(rezult);
-        }
-
-        /*Problema3*/
         /*
-         System.out.println("\nTwitter");
-         Twitter ex3 = new Twitter();
-         while (true) {
-         s = buff.readLine();
-            
-         if (s.contains("EXIT")) {
-         break;
-         } else {
-         ex3.tweet(s);
-         }
+         int[] rolls;
+         int[] correctResult = new int[]{0, 20, 16, 24, 300, 78, 30, 75, 0, 120, 32};
 
+         for (int i = 1; i <= 11; i++) {
+         String filename = "Game" + (i) + ".in";
+         Bowling ex2 = new Bowling();
+         rolls = ex2.readFile(filename);
+         ex2.setGameNr(i);
+         int rezult = ex2.computeScoreFor(rolls);
+         //            if( rezult == correctResult[i-1] ){
+         //                System.out.println("CORECT");
+         //            } else{
+         //                System.out.println("INCORECT");
+         //            }
+         //            System.out.println("-Scorul final pt fisierul " + i
+         //                    + " :" + rezult);
+         //        }
+         System.out.println(rezult);
          }
          */
+        /*Problema3*/
+        System.out.println("\nTwitter");
+        Twitter ex3 = new Twitter();
+        while (true) {
+            s = buff.readLine();
+
+            if (s.contains("EXIT")) {
+                break;
+            } else {
+                ex3.tweet(s);
+            }
+
+        }
     }
 }
