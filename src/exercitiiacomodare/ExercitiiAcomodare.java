@@ -24,38 +24,45 @@ public class ExercitiiAcomodare {
 
         /*Problema 1*/
         /*
-        System.out.println("RomanToDecimal:");
-        RomanNumber ex1 = new RomanNumber();
-        System.out.println("Citeste nr roman: ");
-        String nr = buff.readLine();
-        System.out.println("Citeste o comanda: ");
-        while (true) {
-            s = buff.readLine();
-            if (s.contains("c")) {
-                ex1.doGeneralCheck(nr);
-            } else if (s.contains("t")) {
-                boolean b = ex1.getSyntaxCheckToggle();
-                ex1.setSyntaxCheckToggle(!b);
-            } else {
-                ex1.transform(nr);
+         System.out.println("RomanToDecimal:");
+         RomanNumber ex1 = new RomanNumber();
+         System.out.println("Citeste nr roman: ");
+         String nr = buff.readLine();
+         System.out.println("Citeste o comanda: ");
+         while (true) {
+         s = buff.readLine();
+         if (s.contains("c")) {
+         ex1.doGeneralCheck(nr);
+         } else if (s.contains("t")) {
+         boolean b = ex1.getSyntaxCheckToggle();
+         ex1.setSyntaxCheckToggle(!b);
+         } else {
+         ex1.transform(nr);
+         }
+         }
+
+         //System.out.println("-Rezultatul decimal = " + ex1.transform(s));
+         */
+        /*Problema2*/
+        System.out.println("\nBowling:");
+        int[] rolls;
+        int [] correctResult = new int[] {0, 20, 16, 24, 300, 78, 30, 75, 0, 120, 32};
+    
+        for (int i = 1; i <= 11; i++) {
+            String filename = "Game" + (i) + ".in";
+            Bowling ex2 = new Bowling();
+            rolls = ex2.readFile(filename);
+            ex2.setGameNr(i);
+            int rezult = ex2.computeScoreFor(rolls);
+            if( rezult == correctResult[i-1] ){
+                System.out.println("CORECT");
+            } else{
+                System.out.println("INCORECT");
             }
+            System.out.println("-Scorul final pt fisierul " + i
+                    + " :" + rezult);
         }
 
-        //System.out.println("-Rezultatul decimal = " + ex1.transform(s));
-        */
-        
-         /*Problema2*/
-         System.out.println("\nBowling:");
-         int [] rolls;
-         for (int i = 1; i <= 8; i++) {
-         String filename = "Game" + i + ".in";
-         Bowling ex2 = new Bowling();
-         rolls = ex2.readFile(filename);
-         
-         System.out.println("-Scorul final pt fisierul " + i
-         + " :" + ex2.computeScoreFor(rolls));
-         }
-         
 
         /*Problema3*/
         /*
