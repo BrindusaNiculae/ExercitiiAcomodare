@@ -78,8 +78,12 @@ public class ExercitiiAcomodare {
 //            }
 //
 //        }
-        String filename = "Scenario1.in";
+        String filename;
+        filename = "Scenario1.in";
         ex3.readFile(filename);
-        System.out.println(ex3.compareFiles("Scenario1.ok", "Scenario1.out"));
+        System.out.println(ex3.compareFiles("Scenario1.ok", "Scenario.out"));
+        filename = "Scenario2.in";
+        ex3.readFile(filename);
+        System.out.println(ex3.compareFiles("Scenario2.ok", "Scenario.out"));
     }
 }

@@ -22,7 +22,7 @@ public class Twitter {
     private ArrayList<User> users = new ArrayList();
     private int commandId = 0;
     private long startTime = 0;
-    String fileWriterName = "Scenario1.out";
+    String fileWriterName = "Scenario.out";
     FileWriter fw;
 
     private String[] processCommand(String command) {
@@ -141,7 +141,7 @@ public class Twitter {
         if (i == -1) {
             if (words.length == 1) {
                 fw.write("The user " + words[0]
-                        + " does not exist." + " Please enter a valid user");
+                        + " does not exist." + " Please enter a valid user\n");
             } else if (commandId == 1) {
                 User temp = new User(words[0]);
 
@@ -181,7 +181,8 @@ public class Twitter {
             String s1 = sOK.nextLine();
             String s2 = sOUT.nextLine();
 
-            if (!s2.contains(s1)) {                
+            if (!s2.contains(s1)) {  
+                System.out.println(s2 +" " +s1);
                 return "Invalid output";
             }
         }
