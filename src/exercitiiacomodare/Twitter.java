@@ -49,7 +49,7 @@ public class Twitter {
             User user = users.get(i);
 
             String nameTest = " " + user.getName() + " ";
-            if (nameTest.contains(name)) {
+            if (nameTest.contains(name) && name.contains(nameTest)) {
                 return i;
             }
         }

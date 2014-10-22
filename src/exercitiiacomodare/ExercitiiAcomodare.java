@@ -83,7 +83,12 @@ public class ExercitiiAcomodare {
         ex3.readFile(filename);
         System.out.println(ex3.compareFiles("Scenario1.ok", "Scenario.out"));
         filename = "Scenario2.in";
+       ex3 = new Twitter();
         ex3.readFile(filename);
         System.out.println(ex3.compareFiles("Scenario2.ok", "Scenario.out"));
+        filename = "Scenario3.in";
+        ex3 = new Twitter();
+        ex3.readFile(filename);
+  
     }
 }
