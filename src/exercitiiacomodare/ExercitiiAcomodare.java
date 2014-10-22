@@ -69,15 +69,17 @@ public class ExercitiiAcomodare {
         /*Problema3*/
         System.out.println("\nTwitter");
         Twitter ex3 = new Twitter();
-        while (true) {
-            s = buff.readLine();
-
-            if (s.contains("EXIT")) {
-                break;
-            } else {
-                ex3.tweet(s);
-            }
-
-        }
+//        while (true) {
+//            s = buff.readLine();
+//            if (s.contains("EXIT")) {
+//                break;
+//            } else {
+//                ex3.tweet(s);
+//            }
+//
+//        }
+        String filename = "Scenario1.in";
+        ex3.readFile(filename);
+        System.out.println(ex3.compareFiles("Scenario1.ok", "Scenario1.out"));
     }
 }
