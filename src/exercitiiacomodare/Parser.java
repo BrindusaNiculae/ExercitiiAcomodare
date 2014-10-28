@@ -124,19 +124,4 @@ public class Parser {
         f.flush();
         f.close();
     }
-
-    public void copyFile(String filename) throws FileNotFoundException, IOException {
-        Scanner scanner = new Scanner(new File(filename));
-        FileWriter fw = new FileWriter(new File("copy.txt"));
-
-        while (scanner.hasNext()) {
-            fw.write(" " + scanner.next());
-            fw.write("\n");
-        }
-
-        fw.flush();
-        fw.close();
-
-    }
-
 }
