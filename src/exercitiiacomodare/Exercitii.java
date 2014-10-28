@@ -5,6 +5,7 @@
  */
 package exercitiiacomodare;
 
+import exercitiiacomodare.twitter.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,7 +14,7 @@ import java.io.InputStreamReader;
  *
  * @author Brindu
  */
-public class ExercitiiAcomodare {
+public class Exercitii {
 
     /**
      * @param args the command line arguments
@@ -66,29 +67,6 @@ public class ExercitiiAcomodare {
          System.out.println(rezult);
          }
          */
-        /*Problema3*/
-        System.out.println("\nTwitter");
-        Twitter ex3 = new Twitter();
-//        while (true) {
-//            s = buff.readLine();
-//            if (s.contains("EXIT")) {
-//                break;
-//            } else {
-//                ex3.tweet(s);
-//            }
-//
-//        }
-        String filename;
-        filename = "Scenario1.in";
-        ex3.readFile(filename);
-        System.out.println(ex3.compareFiles("Scenario1.ok", "Scenario.out"));
-        filename = "Scenario2.in";
-       ex3 = new Twitter();
-        ex3.readFile(filename);
-        System.out.println(ex3.compareFiles("Scenario2.ok", "Scenario.out"));
-        filename = "Scenario3.in";
-        ex3 = new Twitter();
-        ex3.readFile(filename);
-  
+      
     }
 }
