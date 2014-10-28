@@ -22,35 +22,40 @@ public class ExercitiiAcomodare {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        String s;
-        BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
         Twitter ex3 = new Twitter();
+
+        String s;
+//        BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));        
 //        while (true) {
 //            s = buff.readLine();
 //            if (s.contains("EXIT")) {
 //                break;
 //            } else {
-//                ex3.tweet(s);
+//                try {
+//                    ex3.tweet(s);
+//                } catch (InvalidUserException | ProfileNotSetException |
+//                        InvalidEditProfileInputException |
+//                        InvalidPhoneNrFormatException |
+//                        InvalidMailFormatException ex) {
+//                    System.exit(1);
+//                   }
 //            }
 //
 //        }
         String filename;
-        filename = "Scenario5.in";
-        try {
-            ex3.readFile(filename);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ExercitiiAcomodare.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidUserException ex) {
-            Logger.getLogger(ExercitiiAcomodare.class.getName()).log(Level.SEVERE, null, ex);
+
+        for (int i = 1; i <= 5; i++) {
+            ex3 = new Twitter();
+            filename = "Scenario" + i + ".in";
+            try {
+                ex3.readFile(filename);
+                String compareFile = "Scenario" + i + ".ok";
+                System.out.println("Pentru testul " + i + ", rezultatul este: ");
+                System.out.println(ex3.compareFiles(compareFile, "Scenario.out"));
+
+            } catch (FileNotFoundException | InvalidUserException ex) {
+                System.exit(1);
+            } 
         }
-        //System.out.println(ex3.compareFiles("Scenario1.ok", "Scenario.out"));
-//        filename = "Scenario2.in";
-//       ex3 = new Twitter();
-//        ex3.readFile(filename);
-//        System.out.println(ex3.compareFiles("Scenario2.ok", "Scenario.out"));
-//        filename = "Scenario3.in";
-//        ex3 = new Twitter();
-//        ex3.readFile(filename);
-//  
     }
 }

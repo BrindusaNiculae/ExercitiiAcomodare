@@ -13,7 +13,7 @@ class InvalidEditProfileInputException extends Exception {
 
     public InvalidEditProfileInputException() {
         System.err.println("The information is invalid");
-        return;
+       
     }
     
 }

@@ -13,7 +13,7 @@ class InvalidPhoneNrFormatException extends Exception {
 
     public InvalidPhoneNrFormatException() {
         System.err.println("Invalid phone nr!");
-        return;
+      
     }
     
 }

@@ -5,10 +5,12 @@
  */
 package exercitiiacomodare.twitter;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -105,13 +107,16 @@ public class Twitter {
         }
     }
 
-    public void tweet(String command) throws InvalidUserException {
+    public void tweet(String command) throws InvalidUserException,
+            ProfileNotSetException, InvalidEditProfileInputException,
+            InvalidPhoneNrFormatException, InvalidMailFormatException, IOException {
         String words[] = processCommand(command);
         String name = " " + words[0] + " ";
         int i = getUserId(name);
 
         if (i > -1) {
-            if (words.length == 1 && commandId != 3) {
+            if (words.length == 1 && commandId != 3 && commandId != 5
+                    && commandId != 6 && commandId != 8) {
                 users.get(i).showPersonalPosts();
             } else {
                 switch (commandId) {
@@ -141,6 +146,57 @@ public class Twitter {
                         }
                         break;
                     case 5:
+                        users.get(i).showProfile();
+                        break;
+                    case 6:
+                        String scanner;
+                        BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
+
+                        String email,
+                         phoneNr,
+                         description;
+                        System.out.println("Set email:");
+                        scanner = buff.readLine();
+                        email = scanner;
+                        if (!email.contains("@")) {
+                            throw new InvalidMailFormatException();
+                        }
+
+                        System.out.println("Set phone number: ");
+                        scanner = buff.readLine();
+                        phoneNr = scanner;
+
+                        if (phoneNr.length() > 10) {
+                            throw new InvalidPhoneNrFormatException();
+                        }
+                        for (char c : phoneNr.toCharArray()) {
+                            if (c < '0' || c > '9') {
+                                throw new InvalidPhoneNrFormatException();
+                            }
+                        }
+
+                        System.out.println("Set description: ");
+                        scanner = buff.readLine();
+                        description = scanner;
+
+                        users.get(i).editProfile(email, phoneNr, description);
+                        break;
+
+                    case 7:
+                        name2 = words[1];
+                        String[] aux = name2.split(" profile");
+                        j = getUserId(" " + aux[0] + " ");
+                        if (j == -1) {
+                            throw new InvalidUserException(name2);
+                        } else {
+                            users.get(j).showProfile();
+                        }
+                        break;
+                    case 8:
+                        users.get(i).showNotifications();
+                        break;
+                    case 9:
+                        users.get(i).getPeopleYouMightKnow();
                         break;
                     default:
                         break;
@@ -153,16 +209,16 @@ public class Twitter {
                 throw new InvalidUserException(words[0]);
             } else if (commandId == 1) {
                 User temp = new User(words[0]);
-
                 long time = System.nanoTime();
-
                 temp.addPost(words[1], time);
                 users.add(temp);
             }
         }
     }
 
-    public void writeToFile(String command) throws IOException, InvalidUserException, InvalidMailFormatException, InvalidEditProfileInputException, InvalidPhoneNrFormatException, ProfileNotSetException {
+    public void writeToFile(String command) throws IOException, InvalidUserException,
+            InvalidMailFormatException, InvalidEditProfileInputException,
+            InvalidPhoneNrFormatException, ProfileNotSetException {
         String words[] = processCommand(command);
         String name = " " + words[0] + " ";
         int i = getUserId(name);
@@ -282,14 +338,12 @@ public class Twitter {
             } else {
                 try {
                     writeToFile(s);
-                } catch (InvalidMailFormatException ex) {
-                    Logger.getLogger(Twitter.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InvalidEditProfileInputException ex) {
-                    Logger.getLogger(Twitter.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InvalidPhoneNrFormatException ex) {
-                    Logger.getLogger(Twitter.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ProfileNotSetException ex) {
-                    Logger.getLogger(Twitter.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InvalidMailFormatException |
+                        InvalidEditProfileInputException |
+                        InvalidPhoneNrFormatException |
+                        ProfileNotSetException ex) {
+                    Logger.getLogger(Twitter.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
 

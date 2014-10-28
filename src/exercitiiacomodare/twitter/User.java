@@ -109,6 +109,16 @@ public class User {
         description = descr;
     }
 
+    public void editProfile(String mail, String tel, String desc) {
+        this.setEmail(mail);
+        this.setPhone(tel);
+        this.setDescription(desc);
+    }
+
+    public void addNotification(String post, long time) {
+        this.notifications.add(new TimedPosts(post, time));
+    }
+
     public void showPersonalPosts() {
         for (TimedPosts post : posts) {
             long elapsedTimeInSec = (System.nanoTime() - post.getTime()) / 1000000000;
@@ -164,6 +174,63 @@ public class User {
         }
     }
 
+    public void showProfile() throws ProfileNotSetException {
+        if (this.getEmail() == "" || this.getPhone() == ""
+                || this.getDescription() == "") {
+            System.out.println("User " + this.getName() + " does not have any info set.");
+        } else {
+            System.out.println("User " + this.getName() + " has the following info:\n");
+            System.out.println("    -Email: " + this.getEmail());
+            System.out.println("    -Telephone nr: " + this.getPhone());
+            System.out.println("    -Description: " + this.getDescription());
+        }
+    }
+
+    public void showNotifications() {
+
+        for (TimedPosts post : notifications) {
+            long elapsedTimeInSec = (System.nanoTime() - post.getTime()) / 1000000000;
+            if (elapsedTimeInSec < 60) {
+                int elapsedTime = (int) elapsedTimeInSec;
+                System.out.println(post.getPost() + "(" + elapsedTime
+                        + " seconds ago)\n");
+            } else {
+                int elapsedTime = (int) (elapsedTimeInSec / 60);
+                System.out.println(post.getPost() + "(" + elapsedTime
+                        + " minutes ago)\n");
+            }
+        }
+    }
+
+    public void getPeopleYouMightKnow() {
+        ArrayList<String> ppl = new ArrayList<>();
+        for (User user : followers) {
+            if (user.getFollowers().size() == 0) {
+                ppl.add("You might know " + user.getName() + "'s followees..."
+                        + "but they don't follow anybody.:( ");
+            } else {
+                for (User personYouMightKnow : user.getFollowers()) {
+                    if (!personYouMightKnow.getName().equals(this.getName())) {
+                        boolean alreadyAdded = false;
+                        for (String aux : ppl) {
+                            if (aux.contains(personYouMightKnow.getName())) {
+                                alreadyAdded = true;
+                            }
+                        }
+                        if (!alreadyAdded) {
+                            ppl.add("You might know: " + personYouMightKnow.getName() + ".\n");
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println("Dear " + this.getName());
+        for (String s : ppl) {
+            System.out.println(s);
+        }
+
+    }
+
     public void showProfileToFile(FileWriter f) throws IOException, ProfileNotSetException {
         if (this.getEmail() == "" || this.getPhone() == ""
                 || this.getDescription() == "") {
@@ -175,12 +242,6 @@ public class User {
             f.write("\n    -Description: " + this.getDescription());
             f.write("\n");
         }
-    }
-
-    public void editProfile(String mail, String tel, String desc) {
-        this.setEmail(mail);
-        this.setPhone(tel);
-        this.setDescription(desc);
     }
 
     public void showWallToFile(FileWriter f) throws IOException {
@@ -254,10 +315,6 @@ public class User {
                         + " minutes ago)\n");
             }
         }
-    }
-
-    public void addNotification(String post, long time) {
-        this.notifications.add(new TimedPosts(post, time));
     }
 
     public void getPeopleYouMightKnowToFile(FileWriter f) throws IOException {

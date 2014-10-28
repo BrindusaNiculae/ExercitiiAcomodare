@@ -14,7 +14,7 @@ class InvalidMailFormatException extends Exception {
     public InvalidMailFormatException() {
         System.err.println("The format of the email is invalid. "
                 + "Enter a valid email address");
-        return;
+      
     }
     
 }
