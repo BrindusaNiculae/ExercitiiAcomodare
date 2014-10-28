@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author Brindu
  */
-public class ExercitiiAcomodare {
+public class Ex {
 
     /**
      * @param args the command line arguments

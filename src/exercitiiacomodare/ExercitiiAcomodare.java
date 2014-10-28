@@ -7,14 +7,17 @@ package exercitiiacomodare;
 
 import exercitiiacomodare.twitter.*;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Brindu
  */
-public class Exercitii {
+public class ExercitiiAcomodare {
 
     /**
      * @param args the command line arguments
@@ -67,6 +70,13 @@ public class Exercitii {
          System.out.println(rezult);
          }
          */
-      
+        Parser p = new Parser();
+        String filename = "tranzactii_selectate_pentru_parser.csv";
+        try {
+            p.parse(filename);
+           // p.copyFile(filename);
+        } catch (FileNotFoundException | InvalidInputException ex) {
+            Logger.getLogger(ExercitiiAcomodare.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
