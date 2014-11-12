@@ -49,37 +49,36 @@ public class ExercitiiAcomodare {
          
          /*Problema2*/
         //System.out.println("\nBowling:");
-       
-         int[] rolls;
-         int[] correctResult = new int[]{0, 20, 16, 24, 300, 78, 30, 75, 0, 120, 32};
-     
-         for (int i = 1; i <= 17; i++) {
-         String filename = "game" + (i) + ".txt";
-         Bowling ex2 = new Bowling();
-         rolls = ex2.readFile(filename);
-         ex2.setGameNr(i);
-         int rezult = ex2.computeScoreFor(rolls);
+        int[] rolls;
+        int[] correctResult = new int[]{0, 20, 16, 24, 300, 78, 30, 75, 0, 120, 32};
+
+        for (int i = 1; i <= 17; i++) {
+            String filename = "game" + (i) + ".txt";
+            Bowling ex2 = new Bowling();
+            rolls = ex2.readFile(filename);
+            ex2.setGameNr(i);
+            int rezult = ex2.computeScoreFor(rolls);
          //            if( rezult == correctResult[i-1] ){
-         //                System.out.println("CORECT");
-         //            } else{
-         //                System.out.println("INCORECT");
-         //            }
-         //            System.out.println("-Scorul final pt fisierul " + i
-         //                    + " :" + rezult);
-         //        }
-         System.out.println(i + " " + rezult);
-         }
+            //                System.out.println("CORECT");
+            //            } else{
+            //                System.out.println("INCORECT");
+            //            }
+            //            System.out.println("-Scorul final pt fisierul " + i
+            //                    + " :" + rezult);
+            //        }
+            System.out.println(i + " " + rezult);
+        }
 
         /*
-        Parser p = new Parser();
-        String filename = "tranzactii_selectate_pentru_parser.csv";
-        try {
-            p.parse(filename);
-           // p.copyFile(filename);
-        } catch (FileNotFoundException | InvalidInputException ex) {
-            Logger.getLogger(ExercitiiAcomodare.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                */
+         Parser p = new Parser();
+         String filename = "tranzactii_selectate_pentru_parser.csv";
+         try {
+         p.parse(filename);
+         // p.copyFile(filename);
+         } catch (FileNotFoundException | InvalidInputException ex) {
+         Logger.getLogger(ExercitiiAcomodare.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         */
     }
-                
+
 }

@@ -62,8 +62,7 @@ public class Bowling implements BowlingScoreCalculator {
                 }
                 return score + rolls[i] + rolls[i + 1] + rolls[i + 2];
 
-            } 
-           /*STRIKE*/ else if (roll1 == 10) {
+            } /*STRIKE*/ else if (roll1 == 10) {
                 nrOfPerfectRolls++;
                 if (nrOfPerfectRolls == 12) {
                     //    System.out.println("If8, jocul " + gameNr);
@@ -100,7 +99,7 @@ public class Bowling implements BowlingScoreCalculator {
                 if (i < N) {
                     //    System.out.println("If11, jocul " + gameNr);
                     nextRoll1 = rolls[i++];
-                    ir = i-1;
+                    ir = i - 1;
                     if (i < N) {
                         //System.out.println("If12, jocul " + gameNr);
                         nextRoll2 = rolls[i++];
