@@ -55,10 +55,14 @@ public class Bowling implements BowlingScoreCalculator {
             /*STRIKE*/
             if (roll1 == 10) {
                 nrOfPerfectRolls++;
+                if (nrOfPerfectRolls == 12) {
+                    //    System.out.println("If8, jocul " + gameNr);
+                    return 300;
+                }
                 // System.out.println("If1, jocul " + gameNr);
 
-                if ((roll2 != -1) && (roll2 != 10)) {
-                       //System.out.println("If3, jocul " + gameNr);
+                if ((roll2 != -1) && (nextRoll1 == -1)) {
+                    //System.out.println("If3, jocul " + gameNr);
                     nextRoll1 = roll2;
                 } else if ((i < N) && (nextRoll1 == -1)) {
                     //   System.out.println("If4, jocul " + gameNr);
@@ -66,7 +70,9 @@ public class Bowling implements BowlingScoreCalculator {
                 }
                 if (i < N) {
                     //   System.out.println("If5, jocul " + gameNr);
-                    nextRoll2 = rolls[i++];
+                    if (nextRoll2 == -1) {
+                        nextRoll2 = rolls[i++];
+                    }
                     score += roll1 + nextRoll1 + nextRoll2;
                     roll1 = nextRoll1;
                     roll2 = nextRoll2;
@@ -77,18 +83,8 @@ public class Bowling implements BowlingScoreCalculator {
                     score += 30;
                     return score;
                 }
-            }
-            /*Daca am mai multe STRIKE la rand, roll2 va fi 10*/
-            if (roll2 == 10) {
-                //   System.out.println("If7, jocul " + gameNr);
-                nrOfPerfectRolls++;
-                if (nrOfPerfectRolls == 12) {
-                    //    System.out.println("If8, jocul " + gameNr);
-                    return 300;
-                }
-                roll2 = -1;
-                nextRoll1 = 10;
-            }/*Daca este SPARE sau OPEN*/ else {
+            } /*Daca am mai multe STRIKE la rand, roll2 va fi 10*/ else {
+                /*Daca este SPARE sau OPEN*/
                 //System.out.println("If9, jocul " + gameNr);
                 if (roll2 == -1) {
                     //   System.out.println("If10, jocul " + gameNr);
@@ -130,6 +126,7 @@ public class Bowling implements BowlingScoreCalculator {
                 }
             }
         }
+
         //System.out.println("If17, jocul " + gameNr);
         return score;
     }

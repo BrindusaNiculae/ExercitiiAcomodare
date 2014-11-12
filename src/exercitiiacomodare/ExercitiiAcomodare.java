@@ -49,12 +49,12 @@ public class ExercitiiAcomodare {
          
          /*Problema2*/
         //System.out.println("\nBowling:");
-        /*
+       
          int[] rolls;
          int[] correctResult = new int[]{0, 20, 16, 24, 300, 78, 30, 75, 0, 120, 32};
-
-         for (int i = 1; i <= 11; i++) {
-         String filename = "Game" + (i) + ".in";
+         /*
+         for (int i = 1; i <= 17; i++) {
+         String filename = "game" + (i) + ".txt";
          Bowling ex2 = new Bowling();
          rolls = ex2.readFile(filename);
          ex2.setGameNr(i);
@@ -67,9 +67,16 @@ public class ExercitiiAcomodare {
          //            System.out.println("-Scorul final pt fisierul " + i
          //                    + " :" + rezult);
          //        }
-         System.out.println(rezult);
+         System.out.println(i + " " + rezult);
          }
-         */
+       */
+         
+         Bowling ex2 = new Bowling();
+         rolls = ex2.readFile("game7.txt");
+         ex2.setGameNr(9);
+         System.out.println("rezultat = " + ex2.computeScoreFor(rolls));
+        
+        /*
         Parser p = new Parser();
         String filename = "tranzactii_selectate_pentru_parser.csv";
         try {
@@ -78,5 +85,7 @@ public class ExercitiiAcomodare {
         } catch (FileNotFoundException | InvalidInputException ex) {
             Logger.getLogger(ExercitiiAcomodare.class.getName()).log(Level.SEVERE, null, ex);
         }
+                */
     }
+                
 }
