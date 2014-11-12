@@ -32,7 +32,6 @@ public class Bowling implements BowlingScoreCalculator {
     Bowling() {
         score = 0;
         nrOfPerfectRolls = 0;
-        rolls = new int[N];
         N = 24;
     }
 
@@ -52,16 +51,19 @@ public class Bowling implements BowlingScoreCalculator {
     @Override
     public int computeScoreFor(int[] rolls) {
 
+        int ir;
         int i = 1;
         roll1 = rolls[0];
+        ir = 0;
         while (i < N) {
-            if (i == N - 4 && roll1 == 10) {
+            if (ir == N - 4 && roll1 == 10 && i == N - 4) {
                 if (rolls[i + 1] == 10 && rolls[i + 2] == 10 && nrOfPerfectRolls == 6) {
                     return 300;
                 }
                 return score + rolls[i] + rolls[i + 1] + rolls[i + 2];
-               
-            } /*STRIKE*/ else if (roll1 == 10) {
+
+            } 
+           /*STRIKE*/ else if (roll1 == 10) {
                 nrOfPerfectRolls++;
                 if (nrOfPerfectRolls == 12) {
                     //    System.out.println("If8, jocul " + gameNr);
@@ -75,6 +77,7 @@ public class Bowling implements BowlingScoreCalculator {
                 } else if ((i < N) && (nextRoll1 == -1)) {
                     //   System.out.println("If4, jocul " + gameNr);
                     nextRoll1 = rolls[i++];
+                    ir = i - 1;
                 }
                 if (i < N) {
                     //   System.out.println("If5, jocul " + gameNr);
@@ -97,6 +100,7 @@ public class Bowling implements BowlingScoreCalculator {
                 if (i < N) {
                     //    System.out.println("If11, jocul " + gameNr);
                     nextRoll1 = rolls[i++];
+                    ir = i-1;
                     if (i < N) {
                         //System.out.println("If12, jocul " + gameNr);
                         nextRoll2 = rolls[i++];
@@ -105,6 +109,9 @@ public class Bowling implements BowlingScoreCalculator {
                         if ((roll1 + roll2) == 10) {
                             //    System.out.println("If13, jocul " + gameNr);
                             score += (roll1 + roll2 + nextRoll1);
+                            if (i == N) {
+                                return score + nextRoll1 + nextRoll2;
+                            }
                             roll1 = nextRoll1;
                             roll2 = nextRoll2;
                             nextRoll1 = -1;
@@ -112,7 +119,7 @@ public class Bowling implements BowlingScoreCalculator {
                         } /*OPEN*/ else if ((roll1 + roll2) < 10) {
                             //    System.out.println("If14, jocul " + gameNr);
                             score += (roll1 + roll2);
-                            if (i == N ) {
+                            if (i == N) {
                                 return score + nextRoll1 + nextRoll2;
                             }
                             roll1 = nextRoll1;
