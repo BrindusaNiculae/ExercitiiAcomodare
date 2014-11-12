@@ -21,7 +21,7 @@ public class Bowling implements BowlingScoreCalculator {
     private int score;
     private int nrOfPerfectRolls;
     private int[] rolls;
-    private final static int N = 24;
+    private static int N = 30;
 
     private int gameNr;
 
@@ -33,16 +33,19 @@ public class Bowling implements BowlingScoreCalculator {
         score = 0;
         nrOfPerfectRolls = 0;
         rolls = new int[N];
+        N = 24;
     }
 
     public int[] readFile(String filename) throws FileNotFoundException {
         int[] vector = new int[N];
+        //System.out.println("N = " + N);
         Scanner scanner = new Scanner(new File(filename));
         int i = 0;
         while (scanner.hasNextInt()) {
             vector[i] = scanner.nextInt();
             i++;
         }
+        N = i;
         return vector;
     }
 
@@ -52,8 +55,13 @@ public class Bowling implements BowlingScoreCalculator {
         int i = 1;
         roll1 = rolls[0];
         while (i < N) {
-            /*STRIKE*/
-            if (roll1 == 10) {
+            if (i == N - 4 && roll1 == 10) {
+                if (rolls[i + 1] == 10 && rolls[i + 2] == 10 && nrOfPerfectRolls == 6) {
+                    return 300;
+                }
+                return score + rolls[i] + rolls[i + 1] + rolls[i + 2];
+               
+            } /*STRIKE*/ else if (roll1 == 10) {
                 nrOfPerfectRolls++;
                 if (nrOfPerfectRolls == 12) {
                     //    System.out.println("If8, jocul " + gameNr);
@@ -78,10 +86,6 @@ public class Bowling implements BowlingScoreCalculator {
                     roll2 = nextRoll2;
                     nextRoll1 = -1;
                     nextRoll2 = -1;
-                }/*nu ajunge aici pt ca N = 24*/ /*Daca nu exista nextRoll2 => game over */ else {
-                    //   System.out.println("If6, jocul " + gameNr);
-                    score += 30;
-                    return score;
                 }
             } /*Daca am mai multe STRIKE la rand, roll2 va fi 10*/ else {
                 /*Daca este SPARE sau OPEN*/
@@ -93,9 +97,8 @@ public class Bowling implements BowlingScoreCalculator {
                 if (i < N) {
                     //    System.out.println("If11, jocul " + gameNr);
                     nextRoll1 = rolls[i++];
-
                     if (i < N) {
-                        //    System.out.println("If12, jocul " + gameNr);
+                        //System.out.println("If12, jocul " + gameNr);
                         nextRoll2 = rolls[i++];
 
                         /*SPARE*/
@@ -109,8 +112,12 @@ public class Bowling implements BowlingScoreCalculator {
                         } /*OPEN*/ else if ((roll1 + roll2) < 10) {
                             //    System.out.println("If14, jocul " + gameNr);
                             score += (roll1 + roll2);
+                            if (i == N ) {
+                                return score + nextRoll1 + nextRoll2;
+                            }
                             roll1 = nextRoll1;
                             roll2 = nextRoll2;
+
                             nextRoll1 = -1;
                             nextRoll2 = -1;
                         }
@@ -126,7 +133,6 @@ public class Bowling implements BowlingScoreCalculator {
                 }
             }
         }
-
         //System.out.println("If17, jocul " + gameNr);
         return score;
     }
