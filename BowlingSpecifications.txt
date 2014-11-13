@@ -1,0 +1,31 @@
+Hello,
+
+The Bowling.java class calculates the score of a valid bowling game.
+A valid bowling game consists of 10 frames. The frames from 1 to 9 have maximum 
+2 rolls per frame, and the 10-th frame can have maximum 3 rolls(in case of a 
+spare or a strike). The total score is calculated as the sum of partial scores 
+for each frame.
+
+The maximum number of pins a player can knock down in a frame is 10. Depending
+on the number of pins they knock down, there are 3 types of throws, each leading
+to a different way to calculate the partial score for that frame:
+    ->the STRIKE: 
+        -the player knocks down all 10 pins in the first roll;
+        -the partial score is calculated as the sum between the current roll and 
+         the next 2 rolls;
+        -there is no second roll for this frame, the game moves on to the next frame;
+    ->the SPARE:
+        -the player knocks down a part of the pins in the first roll, and the
+         rest (up to 10) in the second roll;
+        -the partial score is calculated as the sum between this frame and the next roll;
+    ->OPEN:
+        -the player does not knock down all 10 pins in the frame;
+        -the partial score is calculated as the sum of the knocked down pins;
+There are 2 exceptions to the game depending on the throw in frame 10:
+    ->in case of STRIKE the player is allowed 2 more rolls;
+    ->In case of SPARE the player is allowed 1 more roll;
+In case all 12 throws were STRIKES the final score will be 300.
+
+The java class gets a vector of type int as an input (the vector represents the
+total of rolls for that specific game), and returns the total score.
+
