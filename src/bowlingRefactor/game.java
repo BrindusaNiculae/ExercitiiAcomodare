@@ -11,4 +11,8 @@ package bowlingRefactor;
  */
 public class game {
     
+    public void consists(){}
+    
+    public void moveOn(){}
+    
 }

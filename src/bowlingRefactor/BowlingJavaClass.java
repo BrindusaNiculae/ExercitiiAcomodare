@@ -9,8 +9,7 @@ package bowlingRefactor;
  *
  * @author Brindu
  */
-public class frames {
-    
-    public void haveRolls(){}
+public class BowlingJavaClass {
+    public void calculates(int [] rolls){}
     
 }

@@ -9,8 +9,12 @@ package bowlingRefactor;
  *
  * @author Brindu
  */
-public class frames {
-    
-    public void haveRolls(){}
-    
+public class Strike implements typeOfThrow{
+
+    @Override
+    public void wayToCalculate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
+    
+

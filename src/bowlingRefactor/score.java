@@ -11,4 +11,6 @@ package bowlingRefactor;
  */
 public class score {
     
+    public void isCalculated(int [] rolls){}
+    
 }

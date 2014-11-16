@@ -9,8 +9,8 @@ package bowlingRefactor;
  *
  * @author Brindu
  */
-public class frames {
+public class player {    
+    public void knockDown(){}
     
-    public void haveRolls(){}
-    
+    public void isAllowedMoreThrown(int n){}
 }
